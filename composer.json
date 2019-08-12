@@ -10,7 +10,9 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {},
+    "require": {
+        "codeception/codeception": "3.0.3"
+    },
     "autoload": {
         "psr-4": {
             "phpooya\\events\\": "lib/"

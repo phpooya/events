@@ -1,4 +1,8 @@
 language: php
 php:
   - 7.3.6
-script: codecept run
+install:
+  - composer self-update
+  - composer install
+script:
+  - php vendor/codeception/codeception/codecept run
