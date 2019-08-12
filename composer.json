@@ -1,0 +1,19 @@
+{
+    "name": "phpooya/events",
+    "description": "An event base system.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pooya",
+            "email": "peraghi@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "phpooya\\events\\": "lib/"
+        }
+    }
+}
