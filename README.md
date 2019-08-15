@@ -10,24 +10,41 @@ New level architecture to keep your project designed-pattern.
 
 add `EventTrait` to your class as in example and use `$this->trigger()` inside of your code:
 
-    class UserModel extends model
+    <?php
+    use phpooya\events\EventTrait;
+    use phpooya\events\EventData;
+    
+    class UserModel
     {
-        use phpooya\events\EventTrait;
-        
+        use EventTrait;
+    
         public $name;
         public $email;
-        
-        public function find(int $id)
+        public $password;
+    
+        public function find() : array
         {
-            $this->trigger(new phpooya\events\EventData($this, ['some data.']), "before");
-            //do somthing...
-            $this->trigger(new phpooya\events\EventData($this, ['some data.']), "after");
+            $eventData = new EventData($this);
+            $this->trigger($eventData, "before");
+            
+            $returnData = []; //retrieve data from DB...
+            
+            $this->trigger($eventData, "after");
+            return $returnData;
         }
-        
-        public function save()
+    
+        public function save() : bool
         {
-            $this->trigger(new phpooya\events\EventData($this, ['some data.']), "before");
-            //do somthing...
-            $this->trigger(new phpooya\events\EventData($this, ['some data.']), "after");
+            $eventData = new EventData($this);
+            $this->trigger($eventData, "before");
+            
+            $returnData = true; //save data in DB...
+            
+            $this->trigger($eventData, "after");
+            return $returnData;
         }
     }
+    
+    UserModel::on('before.find', function($data){ /* do something you want... */ });
+    UserModel::on('after.find', function($data){ $data->target->password = "********"; });
+    UserModel::on('after.save', function($data){ /* add log for error... */ });
