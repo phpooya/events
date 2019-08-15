@@ -10,7 +10,7 @@ trait EventTrait
 
         $thisClass = get_called_class();
         while ($thisClass) {
-            $r = new ReflectionClass($thisClass);
+            $r = new \ReflectionClass($thisClass);
             if (!$r->hasMethod($trace[1]['function'])) break;
             $handlers = EventStack::getStack($thisClass, $triggerName);
             if ($handlers) {
