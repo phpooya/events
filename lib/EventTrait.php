@@ -12,7 +12,7 @@ trait EventTrait
         while ($thisClass) {
             $r = new ReflectionClass($thisClass);
             if (!$r->hasMethod($trace[1]['function'])) break;
-            $handlers = @ (array)EventStack::$stack[$thisClass][$triggerName];
+            $handlers = EventStack::getStack($thisClass, $triggerName);
             if ($handlers) {
                 foreach ($handlers as $func) {
                     call_user_func($func, $data);
@@ -25,6 +25,6 @@ trait EventTrait
 
     public static function on(string $triggerName, callable $func) : void
     {
-        EventStack::$stack[get_called_class()][$triggerName][] = $func;
+        EventStack::setStack(get_called_class(), $triggerName, $func);
     }
 }
