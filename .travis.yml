@@ -8,4 +8,4 @@ script:
   - php vendor/codeception/codeception/codecept run
 cache:
   directories:
-    - /home/.composer/cache/files
+    - $HOME/.composer/cache/files
